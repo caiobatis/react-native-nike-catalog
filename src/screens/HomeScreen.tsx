@@ -11,6 +11,7 @@ export const HomeScreen: RootStackScreenComponent<'Home'> = () => {
             <Heading fontSize="2xl" fontWeight="semibold" lineHeight="md">
               Olá, Ton!
             </Heading>
+
             <Input
               autoCapitalize="none"
               autoCorrect={false}

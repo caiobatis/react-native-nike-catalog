@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react-native'
-// import { AppProviders } from 'src/AppProviders'
+import { AppProviders } from 'src/AppProviders'
 
 const customRender: typeof render = (ui, options) =>
   render(ui, {
-    // wrapper: AppProviders,
+    wrapper: AppProviders,
     ...options
   })
 

@@ -10,4 +10,4 @@ export type RootStackScreenComponentProps<RouteName extends keyof RootStackParam
   NativeStackScreenProps<RootStackParamList, RouteName>
 
 export type RootStackScreenComponent<RouteName extends keyof RootStackParamList> =
-  FunctionComponent<RootStackScreenComponentProps<RouteName>>
+  FunctionComponent<Partial<RootStackScreenComponentProps<RouteName>>>

@@ -5,8 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { StatusBar } from 'expo-status-bar'
 import { useColorMode, useColorModeValue, useTheme } from 'native-base'
 
-import { HomeScreen } from '../screens'
 import { RootStackParamList } from './types'
+import { HomeScreen } from '../screens'
 
 const NativeStackNavigator = createNativeStackNavigator<RootStackParamList>()
 

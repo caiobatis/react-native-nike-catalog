@@ -27,8 +27,7 @@ const config: ExpoConfig = {
   web: {
     favicon: './assets/favicon.png'
   },
-  scheme: 'simpanin',
-  jsEngine: 'hermes'
+  scheme: 'catalog'
 }
 
 export default config
