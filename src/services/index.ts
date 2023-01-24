@@ -1,0 +1,3 @@
+// axios setup
+
+// getProducts request
