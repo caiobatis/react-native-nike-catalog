@@ -1,6 +1,7 @@
 import { FunctionComponent, ReactElement } from 'react'
 
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
+import { NavigationContainer } from '@react-navigation/native'
 import { CustomStatusBar } from 'atoms'
 import { NativeBaseProvider } from 'native-base'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
@@ -22,7 +23,9 @@ export const AppProviders: FunctionComponent<{ children: ReactElement<any, any> 
         theme={theme}>
         <CustomStatusBar barStyle="light-content" />
 
-        <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
+        <NavigationContainer>
+          <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
+        </NavigationContainer>
       </NativeBaseProvider>
     </GestureHandlerRootView>
   )

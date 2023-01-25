@@ -24,7 +24,7 @@ export const Toast: FunctionComponent<ToastProps> = ({ type = 'success', text })
 
   return (
     <HStack minW="full" position="relative" p={4}>
-      <Box bg={currentColor} px={4} h={12} borderRadius="full" w="full">
+      <Box bg={currentColor} px={4} h={12} borderRadius="full" w="full" testID="ToastBox">
         <HStack justifyContent="space-between" alignItems="center" h="full">
           <Text fontSize="sm" numberOfLines={1} color="white">
             {text}

@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react'
 
-import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { StatusBar } from 'expo-status-bar'
 import { useColorMode, useColorModeValue, useTheme } from 'native-base'
@@ -23,7 +22,7 @@ export const Navigation: FunctionComponent = () => {
   const headerTintColor = useColorModeValue(theme.colors.darkText, theme.colors.lightText)
 
   return (
-    <NavigationContainer>
+    <>
       <StatusBar style={colorMode.colorMode === 'dark' ? 'light' : 'dark'} />
 
       <NativeStackNavigator.Navigator
@@ -47,6 +46,6 @@ export const Navigation: FunctionComponent = () => {
           options={{ headerShown: false }}
         />
       </NativeStackNavigator.Navigator>
-    </NavigationContainer>
+    </>
   )
 }
