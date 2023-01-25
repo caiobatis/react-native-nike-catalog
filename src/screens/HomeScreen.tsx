@@ -1,15 +1,6 @@
 import { Icons, InputText } from 'atoms'
-import {
-  Flex,
-  HStack,
-  Heading,
-  Image,
-  Pressable,
-  ScrollView,
-  Text,
-  VStack,
-  View
-} from 'native-base'
+import { CatalogCard } from 'molecules'
+import { Flex, HStack, Heading, Pressable, ScrollView, Text, VStack, View } from 'native-base'
 import { RootStackScreenComponent } from 'src/navigation'
 
 const sneakers = [
@@ -271,46 +262,19 @@ export const HomeScreen: RootStackScreenComponent<'Home'> = () => {
               Catálogo
             </Heading>
 
-            <HStack flexWrap="wrap" justifyContent="space-between">
+            <Flex flexDirection="row" flexWrap="wrap" justifyContent="space-between">
               {sneakers.map((item) => (
-                <VStack
-                  p={4}
-                  py={8}
-                  mt={12}
-                  maxW="1/2"
-                  rounded="3xl"
-                  bgColor="white"
-                  space={2}
-                  justifyContent="center">
-                  <Image
-                    w={32}
-                    h={24}
-                    mt={-12}
-                    source={{
-                      uri: item.grid_picture_url
-                    }}
-                    alt={item.name}
-                  />
-                  <HStack alignItems="center">
-                    <View w={4} h={1} bgColor="green.500" rounded="full" mr={2} />
-
-                    <Text fontSize="xs" lineHeight="md" color="gray.600">
-                      {item.designer}
-                    </Text>
-                  </HStack>
-
-                  <Heading fontSize="md" color="gray.600" fontWeight="semibold" lineHeight="xs">
-                    {item.brand_name} {item.nickname}
-                  </Heading>
-
-                  <Text fontSize="xs" lineHeight="md">
-                    {new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(
-                      item.retail_price_cents
-                    )}
-                  </Text>
-                </VStack>
+                <CatalogCard
+                  key={item.id}
+                  brand={item.brand_name}
+                  nickname={item.nickname}
+                  image={item.main_picture_url}
+                  name={item.name}
+                  designer={item.designer}
+                  price={item.retail_price_cents}
+                />
               ))}
-            </HStack>
+            </Flex>
           </VStack>
         </VStack>
       </ScrollView>

@@ -1,9 +1,8 @@
-import { forwardRef } from 'react'
+import { FunctionComponent } from 'react'
 
 import { IInputProps, Input } from 'native-base'
-import { TextInput } from 'react-native'
 
-export const InputText = forwardRef<TextInput, IInputProps>((props) => {
+export const InputText: FunctionComponent<IInputProps> = (props) => {
   return (
     <Input
       py={4}
@@ -15,4 +14,4 @@ export const InputText = forwardRef<TextInput, IInputProps>((props) => {
       {...props}
     />
   )
-})
+}
