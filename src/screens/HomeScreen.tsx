@@ -2,7 +2,7 @@ import { useRef } from 'react'
 
 import { BottomSheetModalTypes } from 'atoms'
 import { CatalogCard, Header } from 'molecules'
-import { Flex, Heading, ScrollView, VStack } from 'native-base'
+import { Flex, Heading, ScrollView, Text, VStack } from 'native-base'
 import { ProductBottomSheet } from 'organisms'
 import { RootStackScreenComponent } from 'src/navigation'
 
@@ -212,7 +212,7 @@ const sneakers = [
   }
 ]
 
-export const HomeScreen: RootStackScreenComponent<'Home'> = () => {
+export const HomeScreen: RootStackScreenComponent<'Home'> = ({ navigation }) => {
   const productRef = useRef<BottomSheetModalTypes>(null)
 
   return (
@@ -222,9 +222,13 @@ export const HomeScreen: RootStackScreenComponent<'Home'> = () => {
           <Header />
 
           <VStack>
-            <Heading fontSize="xl" fontWeight="semibold" lineHeight="md">
+            <Heading fontSize="xl" fontWeight="semibold" lineHeight="md" color="black">
               Catálogo
             </Heading>
+
+            <Text fontSize="md" color="gray.700">
+              Encontre o item ideal para você
+            </Text>
 
             <Flex flexDirection="row" flexWrap="wrap" justifyContent="space-between">
               {sneakers.map((item) => (
@@ -236,7 +240,8 @@ export const HomeScreen: RootStackScreenComponent<'Home'> = () => {
                   name={item.name}
                   designer={item.designer}
                   price={item.retail_price_cents}
-                  onPress={() => productRef.current?.present()}
+                  // onPress={() => productRef.current?.present()}
+                  onPress={() => navigation?.navigate('Cart')}
                 />
               ))}
             </Flex>

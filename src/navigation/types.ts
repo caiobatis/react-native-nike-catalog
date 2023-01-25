@@ -4,6 +4,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 export type RootStackParamList = {
   Home: undefined
+  Cart: undefined
 }
 
 export type RootStackScreenComponentProps<RouteName extends keyof RootStackParamList> =

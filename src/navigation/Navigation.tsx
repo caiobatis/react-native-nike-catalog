@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar'
 import { useColorMode, useColorModeValue, useTheme } from 'native-base'
 
 import { RootStackParamList } from './types'
-import { HomeScreen } from '../screens'
+import { CartScreen, HomeScreen } from '../screens'
 
 const NativeStackNavigator = createNativeStackNavigator<RootStackParamList>()
 
@@ -38,6 +38,12 @@ export const Navigation: FunctionComponent = () => {
         <NativeStackNavigator.Screen
           component={HomeScreen}
           name="Home"
+          options={{ headerShown: false }}
+        />
+
+        <NativeStackNavigator.Screen
+          component={CartScreen}
+          name="Cart"
           options={{ headerShown: false }}
         />
       </NativeStackNavigator.Navigator>
