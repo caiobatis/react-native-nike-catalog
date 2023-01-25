@@ -1,6 +1,10 @@
+import { FunctionComponent } from 'react'
+
 import { CartCard, Header } from 'molecules'
 import { Button, Heading, ScrollView, Text, VStack } from 'native-base'
-import { RootStackScreenComponent } from 'src/navigation'
+
+import { useCart } from './hook'
+import { CartProps } from './types'
 
 const item = {
   box_condition: 'no_original_box',
@@ -43,7 +47,9 @@ const item = {
   upper_material: 'Patent Leather'
 }
 
-export const CartScreen: RootStackScreenComponent<'Home'> = () => {
+export const CartScreen: FunctionComponent<CartProps> = ({ navigation, route }) => {
+  const { handleCheckout } = useCart({ navigation, route })
+
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false} _contentContainerStyle={{ flexGrow: 1 }}>
@@ -70,29 +76,15 @@ export const CartScreen: RootStackScreenComponent<'Home'> = () => {
                 price={item.retail_price_cents}
                 onPress={() => null}
               />
-              <CartCard
-                key={item.id}
-                brand={item.brand_name}
-                nickname={item.nickname}
-                image={item.main_picture_url}
-                name={item.name}
-                designer={item.designer}
-                price={item.retail_price_cents}
-                onPress={() => null}
-              />
-              <CartCard
-                key={item.id}
-                brand={item.brand_name}
-                nickname={item.nickname}
-                image={item.main_picture_url}
-                name={item.name}
-                designer={item.designer}
-                price={item.retail_price_cents}
-                onPress={() => null}
-              />
             </VStack>
 
-            <Button colorScheme="gray" bgColor="black" px={8} rounded="xl" mt={8}>
+            <Button
+              colorScheme="gray"
+              bgColor="black"
+              px={8}
+              rounded="xl"
+              mt={8}
+              onPress={handleCheckout}>
               Finalizar compra
             </Button>
           </VStack>
