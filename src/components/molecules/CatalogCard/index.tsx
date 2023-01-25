@@ -11,15 +11,17 @@ export const CatalogCard: FunctionComponent<CatalogCardProps> = ({
   image,
   name,
   designer,
-  price
+  price,
+  onPress
 }) => {
+  const { width } = Dimensions.get('screen')
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <VStack
         h={56}
         my={2}
-        space={2}
-        w={Dimensions.get('screen').width / 2 - 16 - 16}
+        w={width / 2 - 16 - 16}
         rounded="3xl"
         bgColor="gray.100"
         justifyContent="center">
@@ -30,12 +32,13 @@ export const CatalogCard: FunctionComponent<CatalogCardProps> = ({
             </Text>
           </View>
         </HStack>
-        <Heading fontSize="sm" color="gray.900" fontWeight="semibold" lineHeight="xs" px={4}>
+
+        <Heading fontSize="sm" color="gray.900" fontWeight="semibold" lineHeight="xs" px={4} my={2}>
           {brand} {nickname}
         </Heading>
 
         <Image
-          w={Dimensions.get('screen').width / 2 - 16 - 16}
+          w={width / 2 - 16 - 16}
           h={24}
           source={{
             uri: image

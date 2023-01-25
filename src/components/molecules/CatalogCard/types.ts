@@ -5,4 +5,5 @@ export interface CatalogCardProps {
   name: string
   designer: string
   price: number
+  onPress: () => void
 }

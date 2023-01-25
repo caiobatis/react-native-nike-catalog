@@ -14,6 +14,7 @@ module.exports = function (api) {
             src: './src',
             atoms: './src/components/atoms',
             molecules: './src/components/molecules',
+            organisms: './src/components/organisms',
             services: './src/services'
           }
         }

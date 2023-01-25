@@ -1,6 +1,9 @@
-import { Icons, InputText } from 'atoms'
-import { CatalogCard } from 'molecules'
-import { Flex, HStack, Heading, Pressable, ScrollView, Text, VStack, View } from 'native-base'
+import { useRef } from 'react'
+
+import { BottomSheetModalTypes } from 'atoms'
+import { CatalogCard, Header } from 'molecules'
+import { Flex, Heading, ScrollView, VStack } from 'native-base'
+import { ProductBottomSheet } from 'organisms'
 import { RootStackScreenComponent } from 'src/navigation'
 
 const sneakers = [
@@ -210,52 +213,13 @@ const sneakers = [
 ]
 
 export const HomeScreen: RootStackScreenComponent<'Home'> = () => {
+  const productRef = useRef<BottomSheetModalTypes>(null)
+
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false} _contentContainerStyle={{ flexGrow: 1 }}>
         <VStack flex={1} pb={24} pt={6} safeArea space={8} px={6}>
-          <VStack space={6} bgColor="white" p={4} rounded="3xl">
-            <HStack alignItems="center">
-              <View flex={1} />
-
-              <Pressable _pressed={{ opacity: 0.4 }} flex={1} p={2}>
-                <Icons.Nike color="black" />
-              </Pressable>
-
-              <Pressable p={2} position="relative" _pressed={{ opacity: 0.4 }}>
-                <Icons.Cart color="black" />
-
-                <Flex
-                  w={4}
-                  h={4}
-                  rounded="full"
-                  bgColor="green.600"
-                  justifyContent="center"
-                  alignItems="center"
-                  position="absolute">
-                  <Text fontSize="xs" lineHeight="sm" fontWeight="bold" color="white">
-                    1
-                  </Text>
-                </Flex>
-              </Pressable>
-            </HStack>
-
-            <VStack>
-              <Heading fontSize="2xl" fontWeight="semibold" lineHeight="md">
-                Just do it!
-              </Heading>
-
-              <Text fontSize="md" lineHeight="md">
-                Sinta todo o seu potencial
-              </Text>
-            </VStack>
-
-            <InputText
-              leftElement={<Icons.Search color="black" ml={3} size={6} />}
-              placeholder="Busque aqui"
-              returnKeyType="search"
-            />
-          </VStack>
+          <Header />
 
           <VStack>
             <Heading fontSize="xl" fontWeight="semibold" lineHeight="md">
@@ -272,12 +236,15 @@ export const HomeScreen: RootStackScreenComponent<'Home'> = () => {
                   name={item.name}
                   designer={item.designer}
                   price={item.retail_price_cents}
+                  onPress={() => productRef.current?.present()}
                 />
               ))}
             </Flex>
           </VStack>
         </VStack>
       </ScrollView>
+
+      <ProductBottomSheet ref={productRef} />
     </>
   )
 }
