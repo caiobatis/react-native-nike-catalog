@@ -18,3 +18,7 @@ export type Product = {
   status: string
   storyHtml: string
 }
+
+export type GetProductsParams = {
+  search?: string
+}

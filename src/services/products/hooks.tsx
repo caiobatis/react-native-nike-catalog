@@ -2,11 +2,11 @@ import { AxiosError, AxiosResponse } from 'axios'
 import { useQuery } from 'react-query'
 
 import * as requests from './requests'
-import { Product } from './types'
+import { GetProductsParams, Product } from './types'
 import { ResponseError } from '../types'
 
-export const useGetProductList = () =>
+export const useGetProductList = (params: GetProductsParams) =>
   useQuery<AxiosResponse<Product[]>, AxiosError<ResponseError>>(
-    'getProductList',
-    requests.getProductList
+    ['getProductList', params.search],
+    () => requests.getProductList(params)
   )

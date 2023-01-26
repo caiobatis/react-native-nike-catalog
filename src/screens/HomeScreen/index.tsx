@@ -1,32 +1,44 @@
 import { useRef } from 'react'
 
-import { BottomSheetModalTypes } from 'atoms'
+import { BottomSheetModalTypes, Fallback } from 'atoms'
 import { CatalogCard, Header } from 'molecules'
-import { Flex, Heading, ScrollView, Text, VStack } from 'native-base'
+import { Center, Flex, Heading, ScrollView, Spinner, Text, VStack } from 'native-base'
 import { ProductBottomSheet } from 'organisms'
 import { RootStackScreenComponent } from 'src/navigation'
 
 import { useHome } from './hook'
 
-export const HomeScreen: RootStackScreenComponent<'Home'> = ({ navigation }) => {
+export const HomeScreen: RootStackScreenComponent<'Home'> = () => {
   const productRef = useRef<BottomSheetModalTypes>(null)
 
-  const { products } = useHome({})
+  const { products, productItem, handleSelectProductItem, handleSearch, isLoading } = useHome({})
 
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false} _contentContainerStyle={{ flexGrow: 1 }}>
         <VStack flex={1} pb={24} pt={6} safeArea space={8} px={6}>
-          <Header />
+          <Header onSearch={handleSearch} />
 
           <VStack>
             <Heading fontSize="xl" fontWeight="semibold" lineHeight="md" color="black">
               Catálogo
             </Heading>
 
-            <Text fontSize="md" color="gray.700">
+            <Text fontSize="md" color="gray.700" mb={4}>
               Encontre o item ideal para você
             </Text>
+
+            {isLoading && (
+              <Center py={8}>
+                <Spinner />
+              </Center>
+            )}
+
+            {!products?.length && !isLoading && (
+              <Center py={8}>
+                <Fallback />
+              </Center>
+            )}
 
             <Flex flexDirection="row" flexWrap="wrap" justifyContent="space-between">
               {products?.map((item) => (
@@ -38,7 +50,7 @@ export const HomeScreen: RootStackScreenComponent<'Home'> = ({ navigation }) => 
                   nickname={item.nickname}
                   image={item.gridPictureUrl}
                   price={item.retailPriceCents}
-                  onPress={() => productRef.current?.present()}
+                  onPress={() => [productRef.current?.present(), handleSelectProductItem(item)]}
                 />
               ))}
             </Flex>
@@ -46,7 +58,7 @@ export const HomeScreen: RootStackScreenComponent<'Home'> = ({ navigation }) => 
         </VStack>
       </ScrollView>
 
-      <ProductBottomSheet ref={productRef} />
+      <ProductBottomSheet ref={productRef} data={productItem} />
     </>
   )
 }

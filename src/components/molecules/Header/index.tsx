@@ -8,7 +8,7 @@ import { RootStackParamList } from 'src/navigation'
 
 import { HeaderProps } from './types'
 
-export const Header: FunctionComponent<HeaderProps> = ({ type = 'large' }) => {
+export const Header: FunctionComponent<HeaderProps> = ({ type = 'large', onSearch }) => {
   const isLarge = type === 'large'
 
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
@@ -72,8 +72,9 @@ export const Header: FunctionComponent<HeaderProps> = ({ type = 'large' }) => {
 
           <InputText
             leftElement={<Icons.Search color="black" ml={3} size={6} />}
-            placeholder="Busque aqui"
+            placeholder="Busque por nome, ano, cor"
             returnKeyType="search"
+            onEndEditing={(e) => onSearch(e.nativeEvent.text)}
           />
         </>
       )}
