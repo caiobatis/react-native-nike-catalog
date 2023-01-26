@@ -3,7 +3,7 @@ import { memo } from 'react'
 import { Center, Text } from 'native-base'
 import Svg, { Circle } from 'react-native-svg'
 
-const FallbackIllustration = () => (
+const FallbackIllustration = ({ text = 'Sem dados' }) => (
   <Svg width={140} height={158} viewBox="0 0 159 158" fill="none">
     <Circle cx="79.5" cy="78.666" r="78" stroke="#DBDBDB" />
 
@@ -21,7 +21,7 @@ const FallbackIllustration = () => (
 
     <Center h="full">
       <Text fontSize="xs" color="gray.500">
-        Sem dados
+        {text}
       </Text>
     </Center>
   </Svg>

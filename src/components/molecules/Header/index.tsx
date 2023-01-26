@@ -1,10 +1,13 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useCallback } from 'react'
 
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Icons, InputText } from 'atoms'
+import { debounce } from 'lodash'
 import { Center, Flex, Heading, Pressable, Text, VStack, View } from 'native-base'
+import { Keyboard } from 'react-native'
 import { RootStackParamList } from 'src/navigation'
+import { useCartStoreAtomValue } from 'src/store/cart'
 
 import { HeaderProps } from './types'
 
@@ -12,6 +15,18 @@ export const Header: FunctionComponent<HeaderProps> = ({ type = 'large', onSearc
   const isLarge = type === 'large'
 
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+
+  const { items: cartItems } = useCartStoreAtomValue()
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const changeTextDebouncer = useCallback(
+    debounce((text: string) => {
+      onSearch?.(text)
+
+      console.log(text)
+    }, 400),
+    []
+  )
 
   return (
     <VStack space={6} bgColor="white" p={4} rounded="3xl">
@@ -41,18 +56,20 @@ export const Header: FunctionComponent<HeaderProps> = ({ type = 'large', onSearc
               onPress={() => navigation.navigate('Cart')}>
               <Icons.Cart color="black" />
 
-              <Flex
-                w={4}
-                h={4}
-                rounded="full"
-                bgColor="green.600"
-                justifyContent="center"
-                alignItems="center"
-                position="absolute">
-                <Text fontSize="xs" lineHeight="sm" fontWeight="bold" color="white">
-                  1
-                </Text>
-              </Flex>
+              {!!cartItems?.length && (
+                <Flex
+                  w={4}
+                  h={4}
+                  rounded="full"
+                  bgColor="green.600"
+                  justifyContent="center"
+                  alignItems="center"
+                  position="absolute">
+                  <Text fontSize="xs" lineHeight="sm" fontWeight="bold" color="white">
+                    {cartItems?.length}
+                  </Text>
+                </Flex>
+              )}
             </Pressable>
           )}
         </Flex>
@@ -73,8 +90,10 @@ export const Header: FunctionComponent<HeaderProps> = ({ type = 'large', onSearc
           <InputText
             leftElement={<Icons.Search color="black" ml={3} size={6} />}
             placeholder="Busque por nome, ano, cor"
-            returnKeyType="search"
-            onEndEditing={(e) => onSearch(e.nativeEvent.text)}
+            returnKeyType="none"
+            onEndEditing={(e) => onSearch?.(e.nativeEvent.text)}
+            onChangeText={changeTextDebouncer}
+            onSubmitEditing={Keyboard.dismiss}
           />
         </>
       )}

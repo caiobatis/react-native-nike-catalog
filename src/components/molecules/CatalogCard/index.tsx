@@ -23,7 +23,7 @@ export const CatalogCard: FunctionComponent<CatalogCardProps> = ({
         my={2}
         w={width / 2 - 16 - 16}
         rounded="3xl"
-        bgColor="gray.100"
+        bgColor="white"
         justifyContent="center">
         <HStack alignItems="center" px={4}>
           <View px={2} bgColor="gray.400" rounded="full">
@@ -55,29 +55,6 @@ export const CatalogCard: FunctionComponent<CatalogCardProps> = ({
             {new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(price)}
           </Text>
         </VStack>
-
-        <View
-          position="absolute"
-          w="full"
-          h="full"
-          overflow="hidden"
-          rounded="3xl"
-          top={0}
-          zIndex={-1}>
-          <View
-            w={48}
-            h={48}
-            zIndex={-1}
-            bgColor="white"
-            position="absolute"
-            bottom={24}
-            style={[
-              {
-                transform: [{ rotate: '-75deg' }]
-              }
-            ]}
-          />
-        </View>
       </VStack>
     </TouchableOpacity>
   )

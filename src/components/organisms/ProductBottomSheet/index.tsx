@@ -1,10 +1,12 @@
 import { forwardRef } from 'react'
 
 import { BottomSheetModalTypes, CustomBottomSheet, Icons } from 'atoms'
+import { LinearGradient } from 'expo-linear-gradient'
 import { Button, Center, HStack, Heading, Image, Text, VStack, View } from 'native-base'
 import { Dimensions, TouchableOpacity } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import RenderHTML, { HTMLContentModel, HTMLElementModel } from 'react-native-render-html'
+import { useCartStoreAtomValue, useSetCartStoreAtom } from 'src/store/cart'
 
 import { ProductBottomSheetProps } from './types'
 
@@ -26,8 +28,14 @@ export const ProductBottomSheet = forwardRef<BottomSheetModalTypes, ProductBotto
       })
     }
 
+    const setCartStore = useSetCartStoreAtom()
+
+    const { items: cartItems } = useCartStoreAtomValue()
+
+    const hasInCart = !!cartItems?.find((item) => item?.id === product?.id)
+
     return (
-      <CustomBottomSheet ref={ref} points={['90%']}>
+      <CustomBottomSheet ref={ref} points={['86%']}>
         <Center
           bgColor="white"
           w={9}
@@ -51,7 +59,7 @@ export const ProductBottomSheet = forwardRef<BottomSheetModalTypes, ProductBotto
           }}>
           <VStack space={2} borderTopRadius="xl" pt={6} h="full" overflow="hidden">
             <Image
-              mt={8}
+              mt={2}
               h={250}
               w="full"
               alt={product?.name}
@@ -105,23 +113,33 @@ export const ProductBottomSheet = forwardRef<BottomSheetModalTypes, ProductBotto
             </HStack>
 
             <VStack px={4} pt={6} pb={10}>
-              <Button colorScheme="gray" bgColor="black" px={8} rounded="xl">
-                Adicionar no carrinho
+              <Button
+                colorScheme="gray"
+                bgColor="black"
+                px={8}
+                opacity={hasInCart ? 0.6 : 1}
+                rounded="xl"
+                onPress={() =>
+                  !hasInCart && [
+                    // @ts-ignore
+                    ref?.current?.close(),
+                    setCartStore({
+                      items: [...cartItems, product]
+                    })
+                  ]
+                }>
+                {hasInCart ? 'Já está no carrinho' : 'Adicionar no carrinho'}
               </Button>
             </VStack>
           </VStack>
 
-          <View position="absolute" w="full" h="full" top={-320} zIndex={-1}>
-            <View
-              w="full"
-              h="full"
-              bgColor="gray.200"
-              position="absolute"
-              style={[
-                {
-                  transform: [{ rotate: '-75deg' }]
-                }
-              ]}
+          <View position="absolute" w="full" h={250} top={0} zIndex={-1}>
+            <LinearGradient
+              colors={['#fff', '#fff', '#ddd', '#fff']}
+              style={{
+                width,
+                height: 300
+              }}
             />
           </View>
         </ScrollView>

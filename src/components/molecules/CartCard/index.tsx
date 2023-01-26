@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react'
 
-import { HStack, Heading, Image, Text, VStack, Pressable } from 'native-base'
+import { HStack, Heading, Image, Text, VStack, Flex } from 'native-base'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import { CartCardProps } from './types'
 
@@ -23,8 +24,16 @@ export const CartCard: FunctionComponent<CartCardProps> = ({
           }}
           alt={name}
         />
-        <VStack>
-          <Heading fontSize="sm" color="gray.900" fontWeight="semibold" lineHeight="xs" my={2}>
+
+        <Flex flex={1}>
+          <Heading
+            fontSize="sm"
+            color="gray.900"
+            fontWeight="semibold"
+            lineHeight="xs"
+            my={2}
+            maxW="full"
+            isTruncated>
             {brand} {nickname}
           </Heading>
 
@@ -37,11 +46,20 @@ export const CartCard: FunctionComponent<CartCardProps> = ({
               {new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(price)}
             </Text>
           </VStack>
-        </VStack>
+        </Flex>
 
-        <Pressable position="absolute" bottom={0} right={0} p={0} onPress={onPress}>
-          <Text color="gray.900">Remover</Text>
-        </Pressable>
+        <Flex
+          bottom={0}
+          right={0}
+          py={0.5}
+          px={2}
+          position="absolute"
+          bgColor="warning.300"
+          rounded="full">
+          <TouchableOpacity onPress={onPress}>
+            <Text color="white">Remover</Text>
+          </TouchableOpacity>
+        </Flex>
       </HStack>
     </VStack>
   )
