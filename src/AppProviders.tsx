@@ -1,11 +1,21 @@
 import { FunctionComponent, ReactElement } from 'react'
 
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
+import NetInfo from '@react-native-community/netinfo'
 import { NavigationContainer } from '@react-navigation/native'
 import { CustomStatusBar } from 'atoms'
 import { NativeBaseProvider } from 'native-base'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { QueryClient, QueryClientProvider, onlineManager } from 'react-query'
 import { theme } from 'src/theme'
+
+const queryClient = new QueryClient()
+
+onlineManager.setEventListener((setOnline) => {
+  return NetInfo.addEventListener((state) => {
+    setOnline(!!state.isConnected)
+  })
+})
 
 export const AppProviders: FunctionComponent<{ children: ReactElement<any, any> }> = ({
   children
@@ -17,16 +27,18 @@ export const AppProviders: FunctionComponent<{ children: ReactElement<any, any> 
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <NativeBaseProvider
-        config={{ suppressColorAccessibilityWarning: true }}
-        initialWindowMetrics={initialWindowMetrics}
-        theme={theme}>
-        <CustomStatusBar barStyle="light-content" />
+      <QueryClientProvider client={queryClient}>
+        <NativeBaseProvider
+          config={{ suppressColorAccessibilityWarning: true }}
+          initialWindowMetrics={initialWindowMetrics}
+          theme={theme}>
+          <CustomStatusBar barStyle="light-content" />
 
-        <NavigationContainer>
-          <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
-        </NavigationContainer>
-      </NativeBaseProvider>
+          <NavigationContainer>
+            <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
+          </NavigationContainer>
+        </NativeBaseProvider>
+      </QueryClientProvider>
     </GestureHandlerRootView>
   )
 }

@@ -1,3 +1,1 @@
-// axios setup
-
-// getProducts request
+export * from './products'
