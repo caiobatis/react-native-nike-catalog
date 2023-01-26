@@ -22,8 +22,6 @@ export const Header: FunctionComponent<HeaderProps> = ({ type = 'large', onSearc
   const changeTextDebouncer = useCallback(
     debounce((text: string) => {
       onSearch?.(text)
-
-      console.log(text)
     }, 400),
     []
   )
@@ -41,16 +39,18 @@ export const Header: FunctionComponent<HeaderProps> = ({ type = 'large', onSearc
           </Pressable>
         )}
 
-        <Pressable _pressed={{ opacity: 0.4 }} w={17}>
+        <View w={17}>
           <Center p={2}>
             <Icons.Nike color="black" />
           </Center>
-        </Pressable>
+        </View>
 
         <Flex w={17} alignItems="flex-end">
           {isLarge && (
             <Pressable
               p={2}
+              focusable={false}
+              isFocused={false}
               position="relative"
               _pressed={{ opacity: 0.4 }}
               onPress={() => navigation.navigate('Cart')}>
