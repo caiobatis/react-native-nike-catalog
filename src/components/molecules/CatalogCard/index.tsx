@@ -16,6 +16,11 @@ export const CatalogCard: FunctionComponent<CatalogCardProps> = ({
 }) => {
   const { width } = Dimensions.get('screen')
 
+  const formatedPrice = new Intl.NumberFormat('pt-br', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(price)
+
   return (
     <TouchableOpacity onPress={onPress}>
       <VStack
@@ -52,7 +57,7 @@ export const CatalogCard: FunctionComponent<CatalogCardProps> = ({
           </Text>
 
           <Text fontSize="sm" fontWeight="bold" lineHeight="md" px={4} color="gray.900">
-            {new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(price)}
+            {formatedPrice}
           </Text>
         </VStack>
       </VStack>

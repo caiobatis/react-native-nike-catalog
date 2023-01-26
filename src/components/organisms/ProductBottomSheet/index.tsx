@@ -5,7 +5,6 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { Button, Center, HStack, Heading, Image, Text, VStack, View } from 'native-base'
 import { Dimensions, TouchableOpacity } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import RenderHTML, { HTMLContentModel, HTMLElementModel } from 'react-native-render-html'
 import { useCartStoreAtomValue, useSetCartStoreAtom } from 'src/store/cart'
 
 import { ProductBottomSheetProps } from './types'
@@ -14,25 +13,16 @@ export const ProductBottomSheet = forwardRef<BottomSheetModalTypes, ProductBotto
   ({ data: product }, ref) => {
     const { width } = Dimensions.get('screen')
 
-    const customHTMLElementModels = {
-      'blue-circle': HTMLElementModel.fromCustomModel({
-        tagName: 'blue-circle',
-        mixedUAStyles: {
-          width: 50,
-          height: 50,
-          borderRadius: 25,
-          alignSelf: 'center',
-          backgroundColor: 'blue'
-        },
-        contentModel: HTMLContentModel.block
-      })
-    }
-
     const setCartStore = useSetCartStoreAtom()
 
     const { items: cartItems } = useCartStoreAtomValue()
 
     const hasInCart = !!cartItems?.find((item) => item?.id === product?.id)
+
+    const formatedPrice = new Intl.NumberFormat('pt-br', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(product?.retailPriceCents ?? 0)
 
     return (
       <CustomBottomSheet ref={ref} points={['86%']}>
@@ -79,14 +69,8 @@ export const ProductBottomSheet = forwardRef<BottomSheetModalTypes, ProductBotto
             </HStack>
 
             <View px={4}>
-              <Text fontSize="2xs">
-                <RenderHTML
-                  contentWidth={width}
-                  source={{
-                    html: product?.storyHtml ?? ''
-                  }}
-                  customHTMLElementModels={customHTMLElementModels}
-                />
+              <Text fontSize="xs" color="gray.500">
+                {product?.storyHtml}
               </Text>
             </View>
 
@@ -97,9 +81,7 @@ export const ProductBottomSheet = forwardRef<BottomSheetModalTypes, ProductBotto
                 </Text>
 
                 <Text fontSize="lg" fontWeight="bold" lineHeight="md" color="gray.900">
-                  {new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(
-                    product?.retailPriceCents ?? 0
-                  )}
+                  {formatedPrice}
                 </Text>
               </VStack>
 

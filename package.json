@@ -1,6 +1,6 @@
 {
   "name": "react-native-nike-catalog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "scripts": {
     "start": "expo start",
@@ -8,6 +8,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
+    "lint": "eslint . --ext js,jsx,ts,tsx --config .eslintrc.js",
+    "prettier": "prettier --config .prettierrc --list-different \"src/**/*{ts, tsx}\"",
     "test": "jest -u",
     "test:coverage": "jest -u --coverage"
   },
@@ -20,6 +22,7 @@
     "expo": "47.0.0",
     "expo-linear-gradient": "~12.0.1",
     "expo-status-bar": "~1.4.2",
+    "intl": "^1.2.5",
     "jest": "^26.6.3",
     "jest-expo": "^47.0.1",
     "jotai": "^1.13.1",
@@ -30,12 +33,10 @@
     "react-native": "0.70.5",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-reanimated": "~2.12.0",
-    "react-native-render-html": "^6.3.4",
     "react-native-safe-area-context": "4.4.1",
     "react-native-screens": "~3.18.0",
     "react-native-svg": "13.4.0",
-    "react-query": "^3.39.3",
-    "uuid": "^9.0.0"
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

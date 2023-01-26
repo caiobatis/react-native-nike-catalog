@@ -13,6 +13,11 @@ export const CartCard: FunctionComponent<CartCardProps> = ({
   price,
   onPress
 }) => {
+  const formatedPrice = new Intl.NumberFormat('pt-br', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(price ?? 0)
+
   return (
     <VStack w="full" rounded="3xl" bgColor="white" justifyContent="center" p={4}>
       <HStack>
@@ -43,7 +48,7 @@ export const CartCard: FunctionComponent<CartCardProps> = ({
             </Text>
 
             <Text fontSize="sm" fontWeight="bold" lineHeight="md" color="gray.900">
-              {new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(price)}
+              {formatedPrice}
             </Text>
           </VStack>
         </Flex>
