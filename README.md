@@ -5,14 +5,23 @@ Live: TODO
 ## Stack
 
 > Typescript
+
 > React
+
 > React Native
+
 > Expo
+
 > Native Base
+
 > Axios
+
 > React Query
+
 > Jest + Testing Library
+
 > Jotai
+
 > React Navigation
 
 
