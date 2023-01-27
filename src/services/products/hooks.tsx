@@ -5,7 +5,7 @@ import * as requests from './requests'
 import { GetProductsParams, Product } from './types'
 import { ResponseError } from '../types'
 
-export const useGetProductList = (params: GetProductsParams, onError: () => void) =>
+export const useGetProductList = (params: GetProductsParams, onError: (err: AxiosError) => void) =>
   useQuery<AxiosResponse<Product[]>, AxiosError<ResponseError>>(
     ['getProductList', params.search],
     () => requests.getProductList(params),

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { Toast } from 'atoms'
+import { AxiosError } from 'axios'
 import { useToast } from 'native-base'
 import { Product, useGetProductList } from 'services'
 
@@ -11,10 +12,13 @@ export const useHome: UseHome = () => {
 
   const toast = useToast()
 
-  const handleError = () => {
-    toast.show({
-      render: () => <Toast type="error" text="Encontramos um problema na API, sorry" />
-    })
+  const handleError = (err: AxiosError) => {
+    if (err.response?.status === 503) {
+      // this API is free
+      toast.show({
+        render: () => <Toast type="error" text="Encontramos um problema na API, sorry" />
+      })
+    }
   }
 
   const { isLoading, data: response } = useGetProductList({ search }, handleError)
