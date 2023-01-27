@@ -22,6 +22,6 @@ module.exports = function (api) {
       // Reanimated plugin has to be the last item in the plugins array
       'react-native-reanimated/plugin'
     ],
-    presets: ['babel-preset-expo']
+    presets: ['babel-preset-expo', '@babel/preset-typescript']
   }
 }

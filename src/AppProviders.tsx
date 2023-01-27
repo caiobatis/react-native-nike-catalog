@@ -6,10 +6,10 @@ import { NavigationContainer } from '@react-navigation/native'
 import { CustomStatusBar } from 'atoms'
 import { NativeBaseProvider } from 'native-base'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { QueryClient, QueryClientProvider, onlineManager } from 'react-query'
+import { onlineManager } from 'react-query'
 import { theme } from 'src/theme'
 
-const queryClient = new QueryClient()
+import { QueryWrapper } from './QueryWrapper'
 
 onlineManager.setEventListener((setOnline) => {
   return NetInfo.addEventListener((state) => {
@@ -27,7 +27,7 @@ export const AppProviders: FunctionComponent<{ children: ReactElement<any, any> 
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <QueryClientProvider client={queryClient}>
+      <QueryWrapper>
         <NativeBaseProvider
           config={{ suppressColorAccessibilityWarning: true }}
           initialWindowMetrics={initialWindowMetrics}
@@ -38,7 +38,7 @@ export const AppProviders: FunctionComponent<{ children: ReactElement<any, any> 
             <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
           </NavigationContainer>
         </NativeBaseProvider>
-      </QueryClientProvider>
+      </QueryWrapper>
     </GestureHandlerRootView>
   )
 }

@@ -2,7 +2,7 @@ import { forwardRef } from 'react'
 
 import { BottomSheetModalTypes, CustomBottomSheet, Icons } from 'atoms'
 import { LinearGradient } from 'expo-linear-gradient'
-import { Button, Center, HStack, Heading, Image, Text, VStack, View } from 'native-base'
+import { Button, Center, HStack, Heading, Image, Text, VStack, View, useTheme } from 'native-base'
 import { Dimensions, TouchableOpacity } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useCartStoreAtomValue, useSetCartStoreAtom } from 'src/store/cart'
@@ -12,6 +12,8 @@ import { ProductBottomSheetProps } from './types'
 export const ProductBottomSheet = forwardRef<BottomSheetModalTypes, ProductBottomSheetProps>(
   ({ data: product }, ref) => {
     const { width } = Dimensions.get('screen')
+
+    const theme = useTheme()
 
     const setCartStore = useSetCartStoreAtom()
 
@@ -117,7 +119,12 @@ export const ProductBottomSheet = forwardRef<BottomSheetModalTypes, ProductBotto
 
           <View position="absolute" w="full" h={250} top={0} zIndex={-1}>
             <LinearGradient
-              colors={['#fff', '#fff', '#ddd', '#fff']}
+              colors={[
+                theme.colors.white,
+                theme.colors.white,
+                theme.colors.gray[300],
+                theme.colors.white
+              ]}
               style={{
                 width,
                 height: 300

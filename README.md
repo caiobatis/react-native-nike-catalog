@@ -50,8 +50,21 @@ Pin header to top. I believe I can improve this project by including more tests.
 
 ## Runing project
 
+We are using expo to manage the environments. So to run the project is simple. With the simulator open, run the command:
 
-TODO
+
+ios
+
+```
+yarn && yarn ios
+```
+
+android
+
+```
+yarn && yarn android
+```
+
 
 
 ## Tests
