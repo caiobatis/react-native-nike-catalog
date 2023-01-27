@@ -34,8 +34,7 @@ const config: ExpoConfig = {
     eas: {
       projectId: 'df8e5570-e2c0-424a-a5df-ebfc6d2ab1a7'
     }
-  },
-  owner: 'caiobatistalab'
+  }
 }
 
 export default config

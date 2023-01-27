@@ -52,6 +52,12 @@ Pin header to top. I believe I can improve this project by including more tests.
 
 We are using expo to manage the environments. So to run the project is simple. With the simulator open, run the command:
 
+Add in your .env
+
+```
+API_BASE_URL=https://5b67c708f793e00014562619.mockapi.io/api
+```
+
 
 ios
 
