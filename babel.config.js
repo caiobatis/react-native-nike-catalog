@@ -4,6 +4,7 @@ module.exports = function (api) {
   return {
     plugins: [
       'inline-dotenv',
+      'transform-inline-environment-variables',
       [
         'module-resolver',
         {

@@ -33,7 +33,8 @@ const config: ExpoConfig = {
   extra: {
     eas: {
       projectId: 'df8e5570-e2c0-424a-a5df-ebfc6d2ab1a7'
-    }
+    },
+    apiUrl: process.env.API_BASE_URL
   }
 }
 
