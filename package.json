@@ -11,7 +11,8 @@
     "lint": "eslint . --ext js,jsx,ts,tsx --config .eslintrc.js",
     "prettier": "prettier --config .prettierrc --list-different \"src/**/*{ts, tsx}\"",
     "test": "jest -u",
-    "test:coverage": "jest -u --coverage"
+    "test:coverage": "jest -u --coverage",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4",
@@ -54,6 +55,7 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^8.10.0",
     "eslint-config-universe": "^10.0.0",
+    "husky": "^8.0.3",
     "jest-mock-axios": "^4.7.0-beta4",
     "prettier": "^2.5.1",
     "react-dom": "18.1.0",
