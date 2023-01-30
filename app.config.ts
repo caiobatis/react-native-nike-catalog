@@ -1,7 +1,7 @@
 import { ExpoConfig } from '@expo/config-types'
 
 const config: ExpoConfig = {
-  name: 'react-native-nike-catalog',
+  name: 'Nike catalog',
   slug: 'nike-catalog',
   version: '1.0.0',
   orientation: 'portrait',
