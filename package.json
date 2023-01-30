@@ -10,7 +10,7 @@
     "eject": "expo eject",
     "lint": "eslint . --ext js,jsx,ts,tsx --config .eslintrc.js",
     "prettier": "prettier --config .prettierrc --list-different \"src/**/*{ts, tsx}\"",
-    "test": "jest -u",
+    "test": "NODE_ENV=test jest -u",
     "test:coverage": "jest -u --coverage",
     "prepare": "husky install"
   },
@@ -24,7 +24,7 @@
     "expo-linear-gradient": "~12.0.1",
     "expo-status-bar": "~1.4.2",
     "intl": "^1.2.5",
-    "jest": "^26.6.3",
+    "jest": "^27.0.5",
     "jest-expo": "^47.0.1",
     "jotai": "^1.13.1",
     "lodash": "^4.17.21",
